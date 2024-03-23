@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     [Header("Menus")]
-    [SerializeField] private float _timeLimit, _currentTime;
+    [SerializeField] private float _timeLimit, _currentTime, _timePenalty;
     [SerializeField] private GameObject _pauseMenu, _gameOverMenu;
 
     public bool IsPlaying;
@@ -50,9 +50,7 @@ public class GameState : MonoBehaviour
         SoundManager.Instance.ChangeMusic();
     }
 
-    /// <summary>
-    /// If the game is playing, pause; else, unpause
-    /// </summary>
+
     public void PauseUnpause()
     {
         IsPlaying = !IsPlaying;
@@ -80,6 +78,11 @@ public class GameState : MonoBehaviour
         IsPlaying = false;
         _currentTime = _timeLimit;
         SoundManager.Instance.PlayIntro();
+    }
+
+    public void HitWall()
+    {
+        _currentTime -= _timePenalty;
     }
 
 }
