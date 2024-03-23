@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    [Header("Menus")]
     [SerializeField] private float _timeLimit, _currentTime;
+    [SerializeField] private GameObject _pauseMenu, _gameOverMenu;
 
     public bool IsPlaying;
     public float CurrentTime => _currentTime;
@@ -48,11 +47,39 @@ public class GameState : MonoBehaviour
     {
         _currentTime = _timeLimit;
         IsPlaying = true;
+        SoundManager.Instance.ChangeMusic();
+    }
+
+    /// <summary>
+    /// If the game is playing, pause; else, unpause
+    /// </summary>
+    public void PauseUnpause()
+    {
+        IsPlaying = !IsPlaying;
+        _pauseMenu.SetActive(!_pauseMenu.activeSelf);
+        
+        //Baisser / monter le volume
+        if (IsPlaying)
+        {
+            SoundManager.Instance.ChangeVolume(2f);
+        }
+        else
+        {
+            SoundManager.Instance.ChangeVolume(0.5f);
+        }
     }
 
     public void GameOver()
     {
         Debug.Log("GAME OVER");
+        _gameOverMenu.SetActive(true);
+    }
+
+    public void ResetGame()
+    {
+        IsPlaying = false;
+        _currentTime = _timeLimit;
+        SoundManager.Instance.PlayIntro();
     }
 
 }

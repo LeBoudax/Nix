@@ -74,10 +74,17 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void ChangeVolume()
+    public void ChangeVolume(float? factor = null)
     {
-        Slider slider = _volumeSlider.GetComponent<Slider>();
-        generalVolume = slider.value / slider.maxValue;
+        Slider slider = _volumeSlider?.GetComponent<Slider>();
+        if (factor is null)
+        {
+            generalVolume = slider.value / slider.maxValue;
+        }
+        else
+        {
+            generalVolume = generalVolume * factor.Value;
+        }
 
         foreach (AudioSource s in musicAudioSource)
         {
@@ -152,5 +159,10 @@ public class SoundManager : MonoBehaviour
 
         //...and play sound
         return soundPool.PlaySound(soundQueue[currentIntInQueue % (_soundQueueLength - 1)]);
+    }
+
+    public void PlayIntro()
+    {
+        ChangeMusic(_intro);
     }
 }
