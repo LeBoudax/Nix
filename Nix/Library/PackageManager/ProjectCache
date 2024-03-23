@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638467413269303123
+      ticks: 638468240264252555
     m_Hash: 582842879
   m_LockFileStatus:
     m_FilePath: C:/Users/ghisl/OneDrive/Bureau/SGJ/Nix/Nix/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638467413378560782
+      ticks: 638468240287579666
     m_Hash: 146018820
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
