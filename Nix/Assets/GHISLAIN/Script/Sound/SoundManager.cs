@@ -74,17 +74,26 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void ChangeVolume(float? factor = null)
+    public void ChangeVolume()
     {
         Slider slider = _volumeSlider?.GetComponent<Slider>();
-        if (factor is null)
+
+        generalVolume = slider.value / slider.maxValue;
+       
+        foreach (AudioSource s in musicAudioSource)
         {
-            generalVolume = slider.value / slider.maxValue;
+            s.volume = _musicVolume * generalVolume;
         }
-        else
+
+        foreach (AudioSource s in soundQueue)
         {
-            generalVolume = generalVolume * factor.Value;
+            s.volume = _soundVolume * generalVolume;
         }
+    }
+
+    public void ChangeVolume(float factor)
+    {
+        generalVolume = generalVolume * factor;
 
         foreach (AudioSource s in musicAudioSource)
         {
